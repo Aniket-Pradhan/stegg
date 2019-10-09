@@ -1,5 +1,22 @@
 # stegg
 
+## Setup
+
+1. First create and activate a virtual environment (optional)
+
+```
+$ python -m virtualenv ./.venv
+$ source ./.venv/bin/activate
+```
+
+2. Now, install the dependencies.
+
+```
+$ pip install -r requirements.txt
+```
+
+3. Now you are ready to go. Follow the instructions ahead. :D
+
 ## How to encode and decode messages into images?
 
 The `main.py` provides an easy framework using which text messages can be encoded and decoded.
