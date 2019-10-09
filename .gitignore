@@ -1,4 +1,7 @@
 .venv/
 .vscode/
+images/
+temp_secret
+steg_image.png
 *__pycache__*
 *.pyc
