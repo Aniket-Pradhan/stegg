@@ -45,14 +45,15 @@ You can use `main.py` in `histogram_attack/` to check whether a suspicious image
 
 ```bash
 $ python histogram_attack/main.py -h
-usage: main.py [-h] -c COVER -s SUSPICIOUS
+usage: main.py [-h] -c COVER -s SUSPICIOUS [-n]
 
 optional arguments:
- -h, --help            show this help message and exit
- -c COVER, --cover COVER
-                       Path to the cover image
- -s SUSPICIOUS, --suspicious SUSPICIOUS
-                       Path to the suspicious image.
+  -h, --help            show this help message and exit
+  -c COVER, --cover COVER
+                        Path to the cover image
+  -s SUSPICIOUS, --suspicious SUSPICIOUS
+                        Path to the suspicious image.
+  -n, --noise           Add some noise to the image and then check.
 ```
 
 You can use these arguments to specify the locations of the cover and suspicious images and get the result as well. An example script: `example_hist_attack.sh` is also provided in the root of the project to see a demo (please run `example_encode_decode.sh` before running this script.).
