@@ -14,3 +14,9 @@ echo "python histogram_attack/main.py -c images/download.png -s images/download.
 echo ""
 python histogram_attack/main.py -c images/download.png -s images/download.png
 echo ""
+
+echo "Testing stego image with a noisy (gaussian) cover image"
+echo "python histogram_attack/main.py -c images/download.png -s steg_image.png -n"
+echo ""
+python histogram_attack/main.py -c images/download.png -s steg_image.png -n
+echo ""
