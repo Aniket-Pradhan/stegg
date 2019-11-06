@@ -14,12 +14,18 @@ width, height = i.size
 for y in range(height):
 	for x in range(width):
 		r=g=b=0
-		if pixels[x, y][0]%2==1: r=0
-		else: r=255
-		if pixels[x, y][1]%2==1: g=0
-		else: g=255
-		if pixels[x, y][2]%2==1: b=0
-		else: b=255
+		if pixels[x, y][0]%2==1:
+			r=0
+		else:
+			r=255
+		if pixels[x, y][1]%2==1:
+			g=0
+		else:
+			g=255
+		if pixels[x, y][2]%2==1:
+			b=0
+		else:
+			b=255
 		pixels[x, y] = (r, g, b)
 
 i.show()
