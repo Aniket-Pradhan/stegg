@@ -33,8 +33,11 @@ class encoder:
                 for _ in range(0,(7-len(tmp))):
                     tmp = '0' + tmp
             b += tmp
+        
+        # comment if you want to only encode message length
         for _ in range(0,(self.max_secret_size - len(b)),7):
             b += str(bin(ord(choice('abcdef')))[2:])
+
         # final secret to be embedded
         self.secret = b
     
@@ -68,16 +71,25 @@ class encoder:
                     print(self.cover.image.getpixel((col,row)))
                     exit()
 
-                # get the new lsb value from the bitstream
-                rb = next(bitstream)
-                # modify the original byte with our new lsb
-                red = self.set_lsb(red, rb)
-
-                gb = next(bitstream)
-                green = self.set_lsb(green, gb)
-
-                bb = next(bitstream)
-                blue = self.set_lsb(blue, bb)
+                try:
+                    # get the new lsb value from the bitstream
+                    rb = next(bitstream)
+                    # modify the original byte with our new lsb
+                    red = self.set_lsb(red, rb)
+                except:
+                    red = self.set_lsb(red, 0, dont_change=True)
+                
+                try:
+                    gb = next(bitstream)
+                    green = self.set_lsb(green, gb)
+                except:
+                    green = self.set_lsb(green, 0, dont_change=True)
+                
+                try:
+                    bb = next(bitstream)
+                    blue = self.set_lsb(blue, bb)
+                except:
+                    blue = self.set_lsb(blue, 0, dont_change=True)
 
                 # add pixel with modified values to new image
                 newIm.putpixel((col, row),(red, green, blue))
@@ -85,7 +97,8 @@ class encoder:
         newIm.save(str('steg_image.png'), 'png')
         print('created steg_image.png')        
 
-    def set_lsb(self, in_byte, in_bit):
+    def set_lsb(self, in_byte, in_bit, dont_change=False):
         b = list(bin(in_byte))
-        b[-1] = in_bit
+        if not dont_change:
+            b[-1] = in_bit
         return int(''.join(b),2)
