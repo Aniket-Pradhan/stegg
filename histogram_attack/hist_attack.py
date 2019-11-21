@@ -7,13 +7,13 @@ class histogram_attack:
     def histogram_difference(self, first_hist, second_hist):
         if len(first_hist) != len(second_hist):
             raise Exception("Histogram shapes should match")
-        
+
         hist_diff = []
-        for ind in range(len(first_hist)):
-            hist_diff.append(first_hist[ind] - second_hist[ind])
-        
+        for ind in enumerate(first_hist):
+            hist_diff.append(first_hist[ind[0]] - second_hist[ind[0]])
+
         return hist_diff
-    
+
     def attack(self):
         cover_image_hist = histogram(self.cover_image)
         suspicious_image_hist = histogram(self.suspicious_image)
@@ -26,15 +26,28 @@ class histogram_attack:
         self.diff_b_hist = self.histogram_difference(cover_image_b_hist, suspicious_image_b_hist)
     
     def _analyze_pattern(self, diff):
-        ind = 0
         count_pattern = 0
 
+        set_diff = list(set(diff))
+
+        for elem in set_diff:
+            counter_elem = -1 * elem
+            if counter_elem in set_diff:
+                count_pattern += 1
+
+        return count_pattern
+
+        """
+        # outdated method
+        # only applicable for b == 7
+
+        ind = 0
         while ind < (len(diff)-1):
             if diff[ind] != 0 and diff[ind+1] != 0 and diff[ind] + diff[ind+1] == 0:
                 count_pattern += 1
             ind += 2
-        
         return count_pattern
+        """
 
     def analyze(self):
         count_r = self._analyze_pattern(self.diff_r_hist)
@@ -47,7 +60,7 @@ class histogram_attack:
 
     def __init__(self, cover_image_path, suspicious_image_path):
         # if pattern is found >= threshold value, it is a stego image
-        self.threshold = 60
+        self.threshold = 20
 
         self.cover_image = Image.open(cover_image_path)
         self.suspicious_image = Image.open(suspicious_image_path)

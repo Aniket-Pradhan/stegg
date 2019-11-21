@@ -2,7 +2,6 @@ import argparse
 import skimage
 import numpy as np
 from PIL import Image
-import matplotlib.pyplot as plt
 
 from hist_attack import histogram_attack
 
