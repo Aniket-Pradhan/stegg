@@ -5,3 +5,4 @@ temp_secret
 steg_image.png
 *__pycache__*
 *.pyc
+do_not_commit_dir/
